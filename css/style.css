@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    overflow: hidden
+}
+
+#viewer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+#viewer-toolbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    width: 100%
+}
+
+#fullscreen-block {
+    float: right;
+    margin-right: 20px;
+    opacity: .8;
+    margin-top: 8px
+}
+
+a.fullscreen {
+    background: transparent url(/images/fullscreen.png) no-repeat;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 40px;
+    width: 40px
+}
+
+#togglemode {
+    float: left;
+    height: 50px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none
+}
+
+#togglemode-checkbox {
+    display: none
+}
+
+.togglemode-label {
+    cursor: pointer;
+    display: block;
+    overflow: hidden
+}
+
+.togglemode-icon {
+    display: block;
+    height: 25px;
+    width: 200%;
+    margin-left: -100%
+}
+
+.togglemode-icon:before,
+.togglemode-icon:after {
+    display: block;
+    float: left;
+    width: 50%;
+    padding: 0
+}
+
+.togglemode-icon:before {
+    content: url('/images/landscape.png');
+    background-color: transparent
+}
+
+.togglemode-icon:after {
+    content: url('/images/cardboard.png');
+    background-color: transparent
+}
+
+#togglemode-checkbox:checked+.togglemode-label .togglemode-icon {
+    margin-left: 0
+}
