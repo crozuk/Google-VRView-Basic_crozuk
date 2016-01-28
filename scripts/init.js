@@ -3,12 +3,20 @@
     var element, container;
     var vrMode = false;
 
+//$('#viewer canvas').remove()
+//init(path)
+
+    path = '/files/sphere.jpg';
+
     var clock = new THREE.Clock();
 
-    init();
+    init(path);
     animate();
 
-    function init() {
+    function init(path) {
+
+        asset = path;
+
         renderer = new THREE.WebGLRenderer();
         element = renderer.domElement;
         container = document.getElementById('viewer');
@@ -37,7 +45,7 @@
 
 		window.addEventListener('deviceorientation', setOrientationControls, true);
 
-		var filepath = '/files/sphere.jpg';
+		filepath = asset;
         var currentSphere = new THREE.Mesh(
                 new THREE.SphereGeometry(100, 32, 32),
                 new THREE.MeshBasicMaterial({
