@@ -75,7 +75,7 @@
 		window.addEventListener('deviceorientation', setOrientationControls, true);
 
 		filepath = asset;
-        var currentSphere = new THREE.Mesh(
+         currentSphere = new THREE.Mesh(
                 new THREE.SphereGeometry(100, 32, 32),
                 new THREE.MeshBasicMaterial({
                     map: THREE.ImageUtils.loadTexture(filepath)
@@ -174,9 +174,16 @@
 
 function next (){
     if (index < files.length - 1) {
-        $('#viewer canvas').remove();
+        scene.remove(currentSphere);
         index = index + 1;
-        init(files[index]);
+         currentSphere = new THREE.Mesh(
+                new THREE.SphereGeometry(100, 32, 32),
+                new THREE.MeshBasicMaterial({
+                    map: THREE.ImageUtils.loadTexture(files[index])
+                })
+        );
+        currentSphere.scale.x = -1;
+        scene.add(currentSphere);
         if (index != 0) {$('.prev').removeClass('disabled')} else{};
         if (index < files.length - 1) {} else{$('.next').addClass('disabled')};
     } else{};
@@ -185,9 +192,16 @@ function next (){
 function previous(){
     if (index != 0) {
         $('.next').removeClass('disabled');
-        $('#viewer canvas').remove();
+        scene.remove(currentSphere);
         index = index - 1;
-        init(files[index]);
+        currentSphere = new THREE.Mesh(
+                new THREE.SphereGeometry(100, 32, 32),
+                new THREE.MeshBasicMaterial({
+                    map: THREE.ImageUtils.loadTexture(files[index])
+                })
+        );
+        currentSphere.scale.x = -1;
+        scene.add(currentSphere);
         if (index == 0) {$('.prev').addClass('disabled')} else{};
     } else{};
 }
@@ -243,4 +257,25 @@ function mobileNext() {
             } else{};    
         });
        
+}
+
+
+
+        
+
+function next (){
+    if (index < files.length - 1) {
+        scene.remove(currentSphere);
+        index = index + 1;
+         currentSphere = new THREE.Mesh(
+                new THREE.SphereGeometry(100, 32, 32),
+                new THREE.MeshBasicMaterial({
+                    map: THREE.ImageUtils.loadTexture(files[index])
+                })
+        );
+        currentSphere.scale.x = -1;
+        scene.add(currentSphere);
+        if (index != 0) {$('.prev').removeClass('disabled')} else{};
+        if (index < files.length - 1) {} else{$('.next').addClass('disabled')};
+    } else{};
 }
