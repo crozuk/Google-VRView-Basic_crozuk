@@ -6,16 +6,45 @@
 //$('#viewer canvas').remove()
 //init(path)
 
+// $('#viewer canvas').remove();
+// index = index + 1;
+// getImages(index);
+
+    files = []
+    //Get image file list as string
+    //Defines 'file_list'
+    function getImages(x){
+        file = "/files/files.txt"
+        $.get(file,function(txt){
+            file_list = txt;
+        }).done(function(){
+            buildArray();
+            init(files[x]);
+            buttons();
+        }); 
+    }
+    //Return each image by taking each new line of 'file_list'
+    //Returns images one by one to build array
+    function buildArray(){
+        var lines = file_list.split("\n");
+        for (var i = 0, len = lines.length - 1; i < len; i++) {
+                image_src = '/files/' + lines[i];
+                //console.log(image_src);
+            files.push(image_src);
+        }
+    }
+
+
     path = '/files/sphere.jpg';
 
     var clock = new THREE.Clock();
-
-    init(path);
+    getImages(0);
+    index = 0;
     animate();
 
-    function init(path) {
+    function init(files) {
 
-        asset = path;
+        asset = files;
 
         renderer = new THREE.WebGLRenderer();
         element = renderer.domElement;
@@ -143,7 +172,34 @@
         }
     }
 
-$(document).ready(function()
+function next (){
+    if (index < files.length - 1) {
+        $('#viewer canvas').remove();
+        index = index + 1;
+        init(files[index]);
+        if (index != 0) {$('.prev').removeClass('disabled')} else{};
+        if (index < files.length - 1) {} else{$('.next').addClass('disabled')};
+    } else{};
+}
+
+function previous(){
+    if (index != 0) {
+        $('.next').removeClass('disabled');
+        $('#viewer canvas').remove();
+        index = index - 1;
+        init(files[index]);
+        if (index == 0) {$('.prev').addClass('disabled')} else{};
+    } else{};
+}
+
+function exitFullscreen() {
+    document.webkitExitFullscreen();
+    document.mozCancelFullScreen();
+    document.msExitFullscreen();
+    document.exitFullscreen();
+}
+
+function buttons()
 {
     $('#togglemode-checkbox:checkbox').change(function()
     {
@@ -159,6 +215,32 @@ $(document).ready(function()
 
     $('#fullscreen-block a.fullscreen').on('click', function()
     {
-        fullscreen();
+        
+        if (isFullScreen() != true) {
+            fullscreen();
+            //mobileNext();
+        } else{
+            exitFullscreen();
+        };
     });
-});
+
+    $('#fullscreen-block a.next').on('click', function()
+    {
+        next();
+    });
+    $('#fullscreen-block a.prev').on('click', function()
+    {
+        previous();
+    });
+};
+
+function mobileNext() {
+  
+        $('#viewer').on('click', function(){
+            if (isFullScreen() == true) {
+                if (index < files.length - 1) {next();} else{previous();};
+
+            } else{};    
+        });
+       
+}
