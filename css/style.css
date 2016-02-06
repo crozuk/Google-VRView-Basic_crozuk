@@ -41,7 +41,8 @@ a.fullscreen {
     height: 50px;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none
+    -ms-user-select: none;
+    opacity: 0.8;
 }
 
 #togglemode-checkbox {
@@ -84,5 +85,21 @@ a.fullscreen {
 }
 
 a.disabled {
-    color: red;
+    color: grey;
+    border-color: grey !important;
+    cursor: not-allowed !important;
+}
+
+a.prev, a.next {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0px 4px;
+    border: 1px solid black;
+    padding: 8px;
+    background: white;
+    cursor: pointer;
+    user-select: none;
 }

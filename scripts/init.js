@@ -248,34 +248,13 @@ function buttons()
     });
 };
 
-function mobileNext() {
+// function mobileNext() {
   
-        $('#viewer').on('click', function(){
-            if (isFullScreen() == true) {
-                if (index < files.length - 1) {next();} else{previous();};
+//         $('#viewer').on('click', function(){
+//             if (isFullScreen() == true) {
+//                 if (index < files.length - 1) {next();} else{previous();};
 
-            } else{};    
-        });
+//             } else{};    
+//         });
        
-}
-
-
-
-        
-
-function next (){
-    if (index < files.length - 1) {
-        scene.remove(currentSphere);
-        index = index + 1;
-         currentSphere = new THREE.Mesh(
-                new THREE.SphereGeometry(100, 32, 32),
-                new THREE.MeshBasicMaterial({
-                    map: THREE.ImageUtils.loadTexture(files[index])
-                })
-        );
-        currentSphere.scale.x = -1;
-        scene.add(currentSphere);
-        if (index != 0) {$('.prev').removeClass('disabled')} else{};
-        if (index < files.length - 1) {} else{$('.next').addClass('disabled')};
-    } else{};
-}
+// }
