@@ -14,6 +14,7 @@
             buildArray();
             init(files[x]);
             buttons();
+            mobileNext();
         }); 
     }
     //Return each image by taking each new line of 'file_list'
@@ -193,6 +194,11 @@ function previous(){
     } else{};
 }
 
+function cycle() {
+    if (index == files.length - 1) {cycled = true} else if (index == 0) {cycled = false};
+    if (cycled == false) {next()} else {previous()};
+}
+
 function exitFullscreen() {
     document.webkitExitFullscreen();
     document.mozCancelFullScreen();
@@ -240,13 +246,12 @@ function desktopFullscreenControls(){
     $('a.fullscreen, #togglemode').toggleClass('fsHidden');
 }
 
-// function mobileNext() {
-  
-//         $('#viewer').on('click', function(){
-//             if (isFullScreen() == true) {
-//                 if (index < files.length - 1) {next();} else{previous();};
-
-//             } else{};    
-//         });
-       
-// }
+function mobileNext() {
+        $('#viewer').on('click', function(){
+            if (isFullScreen() == true) {
+                if(WURFL.is_mobile){
+                    cycle();
+                }
+            } else{};    
+        });
+}
