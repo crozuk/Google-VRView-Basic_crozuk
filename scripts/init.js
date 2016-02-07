@@ -3,13 +3,6 @@
     var element, container;
     var vrMode = false;
 
-//$('#viewer canvas').remove()
-//init(path)
-
-// $('#viewer canvas').remove();
-// index = index + 1;
-// getImages(index);
-
     files = []
     //Get image file list as string
     //Defines 'file_list'
@@ -29,13 +22,10 @@
         var lines = file_list.split("\n");
         for (var i = 0, len = lines.length - 1; i < len; i++) {
                 image_src = '/files/' + lines[i];
-                //console.log(image_src);
             files.push(image_src);
         }
     }
 
-
-    path = '/files/sphere.jpg';
 
     var clock = new THREE.Clock();
     getImages(0);
@@ -108,9 +98,6 @@
 		window.removeEventListener('deviceorientation', setOrientationControls, true);
 	}
 
-	function startProject()
-	{
-	}
 
     function resize() {
         var width = container.offsetWidth;
@@ -247,6 +234,11 @@ function buttons()
         previous();
     });
 };
+
+function desktopFullscreenControls(){
+    $('#viewer-toolbar').toggleClass('fsVisible');
+    $('a.fullscreen, #togglemode').toggleClass('fsHidden');
+}
 
 // function mobileNext() {
   
