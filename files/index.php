@@ -8,8 +8,8 @@ Liscense: MIT
 
 /* Uncomment section below, if you want a trivial password protection */
 
-/*
-$PASSWORD = 'sfm'; 
+
+$PASSWORD = 'lol'; 
 session_start();
 if(!$_SESSION['_sfm_allowed']) {
 	// sha1, and random bytes to thwart timing attacks.  Not meant as secure hashing.
@@ -21,7 +21,7 @@ if(!$_SESSION['_sfm_allowed']) {
 	echo '<html><body><form action=? method=post>PASSWORD:<input type=password name=p /></form></body></html>'; 
 	exit;
 }
-*/
+
 
 // must be in UTF-8 or `basename` doesn't work
 setlocale(LC_ALL,'en_US.UTF-8');
@@ -353,7 +353,7 @@ $(function(){
 			.append( $('<td/>').attr('data-sort',data.is_dir ? -1 : data.size)
 				.html($('<span class="size" />').text(formatFileSize(data.size))) ) 
 			.append( $('<td/>').attr('data-sort',data.mtime).text(formatTimestamp(data.mtime)) )
-			.append( $('<td/>').text(perms.join('+')) )
+			//.append( $('<td/>').text(perms.join('+')) )
 			.append( $('<td/>').append($dl_link).append( data.is_deleteable ? $delete_link : '') )
 		return $html;
 	}
@@ -362,7 +362,7 @@ $(function(){
 			$html = $('<div/>').append( $('<a href=#>Home</a></div>') );
 		$.each(path.split('/'),function(k,v){
 			if(v) {
-				$html.append( $('<span/>').text(' ▸ ') )
+				$html.append( $('<span/>').text(' â–¸ ') )
 					.append( $('<a/>').attr('href','#'+base+v).text(v) );
 				base += v + '/';
 			}
@@ -384,13 +384,28 @@ $(function(){
 	}
 })
 
+
+<?php
+if($_GET){
+    if(isset($_GET['update'])){
+        updateFiles();
+    }
+}
+
+
+function updateFiles(){
+   $output = shell_exec("sh update.sh");
+}
+?>
+
+
 </script>
 </head><body>
 <div id="top">
-	<form action="?" method="post" id="mkdir" />
+	<!--<form action="?" method="post" id="mkdir" />
 		<label for=dirname>Create New Folder</label><input id=dirname type=text name=name value="" />
 		<input type="submit" value="create" />
-	</form>
+	</form>-->
 	<div id="file_drop_target">
 		Drag Files Here To Upload
 		<b>or</b>
@@ -404,10 +419,17 @@ $(function(){
 	<th>Name</th>
 	<th>Size</th>
 	<th>Modified</th>
+ <!--
 	<th>Permissions</th>
+  -->
 	<th>Actions</th>
 </tr></thead><tbody id="list">
 
 </tbody></table>
-<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1</a></footer>
+
+<form action="index.php">
+  <input type="submit" class="button" name="update" value="update" />
+</form>
+
+<footer>Simple File Manager</footer>
 </body></html>
