@@ -6,8 +6,8 @@
     files = []
     //Get image file list as string
     //Defines 'file_list'
-    function getImages(x){
-        file = "/files/files.txt"
+    function getImages(x){ 
+        file = "/server/files.txt"
         $.get(file,function(txt){
             file_list = txt;
         }).done(function(){

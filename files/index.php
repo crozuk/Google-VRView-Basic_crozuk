@@ -362,7 +362,7 @@ $(function(){
 			$html = $('<div/>').append( $('<a href=#>Home</a></div>') );
 		$.each(path.split('/'),function(k,v){
 			if(v) {
-				$html.append( $('<span/>').text(' â–¸ ') )
+				$html.append( $('<span/>').text(' ▸ ') )
 					.append( $('<a/>').attr('href','#'+base+v).text(v) );
 				base += v + '/';
 			}
@@ -394,7 +394,10 @@ if($_GET){
 
 
 function updateFiles(){
-   $output = shell_exec("sh update.sh");
+    $old_path = getcwd();
+    chdir('../server');
+    $output = shell_exec("sh update.sh");
+    chdir($old_path);
 }
 ?>
 
